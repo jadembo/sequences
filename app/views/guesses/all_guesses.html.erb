@@ -18,13 +18,29 @@
 
 <ul>
   <li>
-    <%= @first_number%>, <%=@second_number%>, <%=@third_number%>
+    <%=params["first_number"]%>, <%=params["second_number"]%>, <%=params["third_number"]%>
 
-    <%=@test.capitalize%>
+    <% if params["first_number"].to_i < params["second_number"].to_i && params["second_number"].to_i < params["third_number"].to_i%>
+      Yes!
+    <% else%>
+      No.
+    <%end%>
   </li>
 </ul>
 
-<form action="">
+<% @list.each do |guess| %>
+<% if guess.first_num < guess.second_num && guess.second_num < guess.third_num%>
+  <% result = "Yes!" %>
+<%else result = "No."%>
+<% end %>
+  <li>
+    <%=guess.first_num%>, <%=guess.second_num%>, <%=guess.third_num%>
+
+    <%=result%>
+  </li>
+<% end %>
+
+<form action="/all_guesses">
   <p>
     Enter a sequence:
   </p>

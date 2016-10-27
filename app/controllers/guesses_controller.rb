@@ -1,16 +1,11 @@
 class GuessesController < ApplicationController
   def index
-    #params = {"first_number"=> " ", "second_number" =>"", "third_number"=> ""}
-
-    @first_number = params["first_number"]
-    @second_number = params["second_number"]
-    @third_number = params["third_number"]
-
-    if @first_number < @second_number && @second_number < @third_number
-      @test = "yes!"
-    else
-      @test = "no."
-    end
+    g=Guess.new
+    g.first_num = params["first_number"]
+    g.second_num = params["second_number"]
+    g.third_num = params["third_number"]
+    g.save
+    @list = Guess.all
 
     render("all_guesses.html.erb")
   end
